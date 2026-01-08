@@ -177,10 +177,10 @@ order by c_name;
 
 -- 13. Tính tổng doanh thu của quán theo từng ngày. (5 điểm)
 SELECT 
-    o_date,
-    SUM(total_amount) AS tong_doanh_thu 
-FROM orders 
-GROUP BY order_date;
+    o.o_date,
+    SUM(o.total_amount) AS tong_doanh_thu 
+FROM orders o 
+GROUP BY o.o_date;
 
 
 -- 14. Thống kê những đơn hàng (order_id) có từ 2 loại sản phẩm khác nhau trở lên trong order_detail.(5 điểm)
@@ -192,4 +192,7 @@ select
     p.price
 from Product p
 	where p.price > avg(p.price);
+    
+-- 16. Hiển thị tên các khách hàng đã từng mua sản phẩm 'Matcha Latte'.(5 điểm)
+-- 17. Hiển thị bảng thông tin về đơn hàng gồm: order_id, order_date, product_name, quantity, subtotal. (5 điểm)
     
