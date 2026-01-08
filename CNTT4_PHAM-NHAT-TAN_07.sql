@@ -187,12 +187,32 @@ GROUP BY o.o_date;
 
 
 -- 15. Lấy danh sách sản phẩm có giá cao hơn giá trung bình của tất cả sản phẩm trong quán.(5 điểm)
-select
-	p.p_name,
-    p.price
-from Product p
-	where p.price > avg(p.price);
-    
+SELECT
+    p_name,
+    price
+FROM Product
+WHERE price > (
+    SELECT AVG(price) FROM Product
+);
+
 -- 16. Hiển thị tên các khách hàng đã từng mua sản phẩm 'Matcha Latte'.(5 điểm)
+SELECT DISTINCT
+    c.ct_name
+FROM Customer c
+JOIN orders o ON c.ct_id = o.ct_id
+JOIN Order_detail od ON o.o_id = od.o_id
+JOIN Product p ON od.p_id = p.p_id
+WHERE p.p_name = 'Matcha Latte';
+
 -- 17. Hiển thị bảng thông tin về đơn hàng gồm: order_id, order_date, product_name, quantity, subtotal. (5 điểm)
     
+SELECT
+    o.o_id,
+    o.o_date,
+    p.p_name,
+    od.quantity,
+    od.subtotal
+FROM orders o
+JOIN Order_detail od ON o.o_id = od.o_id
+JOIN Product p ON od.p_id = p.p_id
+ORDER BY o.o_id;
